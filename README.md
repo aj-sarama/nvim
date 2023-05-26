@@ -106,7 +106,14 @@ Text objects further enhance the functionality of treesitter.
 #### Selection:
 
 Use the following mappings in visual mode:
-- `af` to select the outer function (query on the tag `@function.outer`
+- `<leader>sf` to select the entire function the cursor-targeted node is currently in (query on the tag `@function.outer`)
+- `<leader>sF` to select the inside of the function the cursor-targeted node is currently in (query on the tag `@function.inner`)
+- `<leader>so` to select the entire comment
+More text object queries can be found in the [official documentation](https://github.com/nvim-treesitter/nvim-treesitter-textobjects#text-objects-select).  
+
+#### Custom queries:
+
+TODO.
 
 ### Telescope
 

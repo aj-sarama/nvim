@@ -58,16 +58,18 @@ local options = {
         --[[
             'select' allows for selection on various queries in visual mode.
 
-            the example "af" selects the entire function outer when in a node that is contained by a function
+            custom queries may or may not be taken care of in this file TODO
         --]]
         select = {
             enable = true,
             keymaps = {
-                ["af"] = { query = "@function.outer", desc = "select function outer (TSObject)" },
-                ["if"] = { query = "@function.inner", desc = "select function inner (TSObject)" },
-                ["oc"] = { query = "@comment.outer", desc = "select comment (TSObject)" },
+                ["<leader>sf"] = { query = "@function.outer", desc = "select function outer (TSObject)" },
+                ["<leader>sF"] = { query = "@function.inner", desc = "select function inner (TSObject)" },
+                ["<leader>sc"] = { query = "@comment.outer", desc = "select comment (TSObject)" },
             }
-        }
+        },
+
+        include_surrounding_whitespace = true,
     }
 
 }
@@ -98,10 +100,6 @@ local function swap_backward()
         ts_utils.swap_nodes(curr_node, next_node, buffer_number, true) 
     end
 end
-
-local function test(a, b, c)
-    print("test")
-end 
 
 -- KEYMAPS
 -- swap node forward
