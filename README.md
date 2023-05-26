@@ -99,7 +99,14 @@ Examples for changing highlight groups for treesitter nodes are in `change_highl
 Treesitter playground can assist with identifying the highlight groups for making changes. Use the command `:TSHighlightCapturesUnderCursor` 
 to get highlight information on a given node. This can be helpful for changing highlight groups.
 
-#### 
+### Treesitter text objects
+
+Text objects further enhance the functionality of treesitter.  
+
+#### Selection:
+
+Use the following mappings in visual mode:
+- `af` to select the outer function (query on the tag `@function.outer`
 
 ### Telescope
 

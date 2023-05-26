@@ -51,6 +51,23 @@ local options = {
 
     indent = {
         enable = true,
+    },
+
+    -- text object support is included in this config
+    textobjects = {
+        --[[
+            'select' allows for selection on various queries in visual mode.
+
+            the example "af" selects the entire function outer when in a node that is contained by a function
+        --]]
+        select = {
+            enable = true,
+            keymaps = {
+                ["af"] = { query = "@function.outer", desc = "select function outer (TSObject)" },
+                ["if"] = { query = "@function.inner", desc = "select function inner (TSObject)" },
+                ["oc"] = { query = "@comment.outer", desc = "select comment (TSObject)" },
+            }
+        }
     }
 
 }
@@ -81,6 +98,10 @@ local function swap_backward()
         ts_utils.swap_nodes(curr_node, next_node, buffer_number, true) 
     end
 end
+
+local function test(a, b, c)
+    print("test")
+end 
 
 -- KEYMAPS
 -- swap node forward
