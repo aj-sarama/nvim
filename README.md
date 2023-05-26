@@ -1,5 +1,4 @@
 # Simple Lua Neovim Config
-*Author: AJ Sarama*
 
 ---
 
@@ -55,9 +54,29 @@ which highlight group belongs to which plugin coincidentally becomes easier in t
 2. Adding autocommands to the color scheme *.lua* config: This has the benefit of keeping all highlight group-setting functionality 
 within the color scheme plugin setup. The relevant event for the autocommand should be `BufEnter`.
 
-### Tree sitter
+### Treesitter
 
-TODO
+Treesitter manages syntax highlights and several motions when writing code.  
+
+#### Setting languages:
+Add any language (see `:TSModuleInfo` for a list of supported languages) by adding an element to this table in *nvim-treesitter.lua*:  
+```lua
+local languages = {
+    "c", 
+    "lua",
+    "vim",
+    "vimdoc",
+    "query",
+    -- ALL ABOVE ARE CONSIDERED REQUIRED
+    -- ADD NEW LANGUAGES BELOW
+    "python",
+    "rust",
+    "haskell",
+}
+```  
+*note that the nvim-treesitter documentation recommends not removing the first 5 parsers listed*  
+<br>
+The parsers will be installed inside `/.config/nvim/parsers`. 
 
 ### Telescope
 

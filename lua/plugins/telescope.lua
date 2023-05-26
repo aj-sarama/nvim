@@ -38,6 +38,8 @@ return {
     config = function(_, opts)
         require("telescope").setup(opts)
         --vim.cmd('highlight TelescopeNormal guifg=#ff0000 guibg=#000000 gui=bold')
+        vim.keymap.set("n", "<space>ff", ":Telescope find_files<CR>")
+
     end,
     dependencies = { 'nvim-lua/plenary.nvim' },
     event = "BufEnter",
