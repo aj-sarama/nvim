@@ -85,12 +85,12 @@ The parsers will be installed inside `/.config/nvim/parsers`.
 The keybindings are:  
 - `<space>s` to swap nodes forward
 - `<space>S` to swap nodes backward
-<br>
+
+*TODO: this should probably be superseded by text objects*
 
 #### Changing highlight groups:
 
 Examples for changing highlight groups for treesitter nodes are in `change_highlight_groups()`. 
-<br>
 
 #### Treesitter playground:
 
@@ -98,8 +98,6 @@ Examples for changing highlight groups for treesitter nodes are in `change_highl
 <br>
 Treesitter playground can assist with identifying the highlight groups for making changes. Use the command `:TSHighlightCapturesUnderCursor` 
 to get highlight information on a given node. This can be helpful for changing highlight groups.
-
-<br>
 
 #### 
 
