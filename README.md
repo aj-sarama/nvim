@@ -1,4 +1,35 @@
-# nvim
-current neovim configuration
+# Simple Lua Neovim Config
+*Author: AJ Sarama*
 
-test change
+---
+
+## Lazy Plugin Manager
+
+I use [lazy](https://github.com/folke/lazy.nvim) to manage plugins. The file structure is as follows:
+nvim/
+-> [init.lua](https://github.com/aj-sarama/nvim/blob/main/init.lua)
+-> lua/
+    -> plugins/
+        -> *each plugin gets their own .lua configuration file*
+    -> [autocommands.lua](https://github.com/aj-sarama/nvim/blob/main/lua/autocommands.lua)
+    -> [keymaps.lua](https://github.com/aj-sarama/nvim/blob/main/lua/keymaps.lua)
+    -> [settings.lua](https://github.com/aj-sarama/nvim/blob/main/lua/settings.lua)
+-> parsers/
+    -> *TreeSitter parsers are stored here*
+
+## Autocommands
+
+TODO: write about autocommands file and what to put in there
+
+## Keymaps
+
+TODO: write about keymaps file and what to put in there
+
+## Settings
+
+TODO: write about settings chosen and what to put in there
+
+## /lua/plugins directory
+
+For each new plugin, create a new file in this directory named *[plugin_name].lua*. 
+Follow the specs outlined in [lazy](https://github.com/folke/lazy.nvim)
