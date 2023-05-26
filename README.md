@@ -15,7 +15,7 @@ TODO: write about autocommands file and what to put in there
 
 ### Keymaps
 
-TODO: write about keymaps file and what to put in there
+The file *lua/keymaps.lua* should set any non-plugin keymappings. `<leader>` is set to `<space>` in this file.
 
 ### Settings
 
@@ -79,15 +79,6 @@ local languages = {
 The parsers will be installed inside `/.config/nvim/parsers`. 
 <br>
 
-#### Swapping nodes:
-
-*nvim-treesitter.lua* includes functionality for swapping adjacent treesitter nodes (such as elements in a list or tuple).
-The keybindings are:  
-- `<space>s` to swap nodes forward
-- `<space>S` to swap nodes backward
-
-*TODO: this should probably be superseded by text objects*
-
 #### Changing highlight groups:
 
 Examples for changing highlight groups for treesitter nodes are in `change_highlight_groups()`. 
@@ -110,6 +101,18 @@ Use the following mappings in visual mode:
 - `<leader>sF` to select the inside of the function the cursor-targeted node is currently in (query on the tag `@function.inner`)
 - `<leader>so` to select the entire comment
 More text object queries can be found in the [official documentation](https://github.com/nvim-treesitter/nvim-treesitter-textobjects#text-objects-select).  
+
+#### Movement:
+
+Use the following motions:  
+- `[[` to go to the beginning of the previous function
+- `]]` to go to the beginning of the next function
+
+#### Swapping: 
+
+Use the following mappings to swap parameters in tuples, function parameters, etc.:
+- `<space>s` to swap nodes forward
+- `<space>S` to swap nodes backward
 
 #### Custom queries:
 

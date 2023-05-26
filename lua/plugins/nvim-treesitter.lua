@@ -57,19 +57,57 @@ local options = {
     textobjects = {
         --[[
             'select' allows for selection on various queries in visual mode.
-
             custom queries may or may not be taken care of in this file TODO
+
+            selection modes changes the visual mode for a particular query (ex. "V" for linewise selection)
         --]]
         select = {
             enable = true,
             keymaps = {
-                ["<leader>sf"] = { query = "@function.outer", desc = "select function outer (TSObject)" },
-                ["<leader>sF"] = { query = "@function.inner", desc = "select function inner (TSObject)" },
-                ["<leader>sc"] = { query = "@comment.outer", desc = "select comment (TSObject)" },
+                ["<leader>sf"] = { query = "@function.outer", desc = "select function outer" },
+                ["<leader>sF"] = { query = "@function.inner", desc = "select function inner" },
+                ["<leader>sc"] = { query = "@comment.outer", desc = "select comment" },
+            },
+            selection_modes = {
+                -- select entire lines for these queries
+                ["@function.outer"] = "V",
+                ["@function.inner"] = "V",
+            },
+            include_surrounding_whitespace = true,
+        },
+        --[[
+            'move' allows for cursor movement options on various queries
+        --]]
+        move = {
+            enable = true,
+            set_jumps = true, -- makes these motions change the jump list
+            -- goes to the start of the next match based on the query
+            goto_next_start = {
+                ["]]"] = { query = "@function.outer", desc = "next function start" },
+            },
+            -- goes to the end of the next match
+            goto_next_end = {
+            },
+            -- goes to the start of the next match in reverse order
+            goto_previous_start = {
+                ["[["] = { query = "@function.outer", desc = "prev function start" },
+            },
+            -- goes to the end of the next match in reverse order
+            goto_previous_end = {
+            },
+        },
+        --[[
+            'swap' implements swapping parameters using text objects
+        --]]
+        swap = {
+            enable = true,
+            swap_next = {
+                ["<leader>s"] = { query = "@parameter.inner", desc = "swap with next parameter" },
+            },
+            swap_previous = {
+                ["<leader>S"] = { query = "@parameter.inner", desc = "swap with previous parameter" },
             }
         },
-
-        include_surrounding_whitespace = true,
     }
 
 }
@@ -100,13 +138,6 @@ local function swap_backward()
         ts_utils.swap_nodes(curr_node, next_node, buffer_number, true) 
     end
 end
-
--- KEYMAPS
--- swap node forward
-vim.keymap.set("n", "<space>s", swap_forward, { noremap = true, desc = "TS swap forward" })
--- swap node backward
-vim.keymap.set("n", "<space>S", swap_backward, { noremap = true, desc = "TS swap backward" })
-
 
 -- In the event that you want to reassign certain highlight groups, add to this function:
 local function change_highlight_groups()
