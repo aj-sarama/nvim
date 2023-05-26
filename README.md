@@ -31,7 +31,11 @@ Follow the specs outlined in [lazy](https://github.com/folke/lazy.nvim)
 
 ### Color scheme
 
-TODO
+My current color scheme is [rose-pine](https://github.com/rose-pine/neovim), however this is subject to frequent change.
+Keep *rose-pine.lua* intact as a reference for changing color schemes. Change the *enabled* entry in the plugin options to false.  
+<br>
+Notes from managing color schemes with lazy:
+1. Set the `priority` entry to `1000` 
 
 ### Tree sitter
 
