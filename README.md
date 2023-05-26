@@ -7,15 +7,38 @@
 
 I use [lazy](https://github.com/folke/lazy.nvim) to manage plugins. The file structure is as follows:
 nvim/  
--> [init.lua](https://github.com/aj-sarama/nvim/blob/main/init.lua)
--> lua/  
-    -> plugins/  
-        -> *each plugin gets their own .lua configuration file*  
-    -> [autocommands.lua](https://github.com/aj-sarama/nvim/blob/main/lua/autocommands.lua)  
-    -> [keymaps.lua](https://github.com/aj-sarama/nvim/blob/main/lua/keymaps.lua)  
-    -> [settings.lua](https://github.com/aj-sarama/nvim/blob/main/lua/settings.lua)  
--> parsers/  
-    -> *TreeSitter parsers are stored here*  
+├── README.md
+├── init.lua
+├── lazy-lock.json
+├── lua
+│   ├── autocommands.lua
+│   ├── keymaps.lua
+│   ├── plugins
+│   │   ├── nvim-treesitter.lua
+│   │   ├── rose-pine.lua
+│   │   ├── telescope.lua
+│   │   ├── treesitter-playground.lua
+│   │   └── which-key.lua
+│   └── settings.lua
+└── parsers
+    ├── parser
+    │   ├── c.so
+    │   ├── haskell.so
+    │   ├── lua.so
+    │   ├── python.so
+    │   ├── query.so
+    │   ├── rust.so
+    │   ├── vim.so
+    │   └── vimdoc.so
+    └── parser-info
+        ├── c.revision
+        ├── haskell.revision
+        ├── lua.revision
+        ├── python.revision
+        ├── query.revision
+        ├── rust.revision
+        ├── vim.revision
+        └── vimdoc.revision
 
 ## Autocommands
 
