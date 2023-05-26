@@ -1,5 +1,5 @@
 -- list of installed languages
--- automatic install set to OFF
+-- any languages added to this list will be automatically installed on the next setup() call
 local languages = {
     "c", 
     "lua",
@@ -13,14 +13,18 @@ local languages = {
     "haskell",
 }
 
--- parsers will be installed inside the config directory somewhere
+-- parsers will be installed here
 local parser_path = os.getenv("HOME") .. "/.config/nvim/parsers"
 
 vim.opt.runtimepath:append(parser_path)
+
+--[[
+    NOTE: 'auto_install' is currently set to false, which should be the case whenever the TreeSitter CLI is not installed.
+    -> If you have the TS CLI installed, change 'auto_install' to true to automatically install parsers for languages.
+--]]
 local options = {
     ensure_installed = languages,
     sync_install = false,
-    -- Keep set to false unless TreeSitter CLI Installed
     auto_install = false,
     parser_install_dir = parser_path,
 
@@ -50,8 +54,15 @@ local options = {
     }
 
 }
-test = { "a", "b", "c" }
--- adding swap capabilities via a keymap
+
+--[[
+    Below are some simple functions that use treesitter utility to swap adjacent nodes using a keymap.
+    
+    swap_forward() will swap the node that the cursor is on with the next node
+    swap_backward() does the same in reverse
+
+    The keymaps for this functionality are set below the functions
+--]]
 local ts_utils = require('nvim-treesitter.ts_utils')
 local function swap_forward()
     local curr_node = ts_utils.get_node_at_cursor()
@@ -71,18 +82,26 @@ local function swap_backward()
     end
 end
 
--- keymaps
+-- KEYMAPS
+-- swap node forward
 vim.keymap.set("n", "<space>s", swap_forward, { noremap = true, desc = "TS swap forward" })
+-- swap node backward
 vim.keymap.set("n", "<space>S", swap_backward, { noremap = true, desc = "TS swap backward" })
 
--- changing highlight groups
+
+-- In the event that you want to reassign certain highlight groups, add to this function:
+local function change_highlight_groups()
+    -- (scope, node type, link = highlight group name)
+    -- 0 is the global scope
+    vim.api.nvim_set_hl(0, "@keyword.operator", { link = "Conditional" })
+end
 
 return { "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     lazy = false, -- lazy loading treesitter causes more issues than it seems to be worth
     config = function()
         require("nvim-treesitter.configs").setup(options)
-        vim.api.nvim_set_hl(0, "@keyword.operator", { link = "Conditional" })
+        change_highlight_groups()
     end,
 }
 

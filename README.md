@@ -77,6 +77,25 @@ local languages = {
 *note that the nvim-treesitter documentation recommends not removing the first 5 parsers listed*  
 <br>
 The parsers will be installed inside `/.config/nvim/parsers`. 
+<br>
+#### Swapping nodes:
+*nvim-treesitter.lua* includes functionality for swapping adjacent treesitter nodes (such as elements in a list or tuple).
+The keybindings are:  
+- `<space>s` to swap nodes forward
+- `<space>S` to swap nodes backward
+<br>
+#### Changing highlight groups:
+Examples for changing highlight groups for treesitter nodes are in `change_highlight_groups()`. 
+<br>
+#### Treesitter playground:
+*NOTE: treesitter playground is installed but typically disabled in my config. Edit to the treesitter playground config to enable it.*  
+<br>
+Treesitter playground can assist with identifying the highlight groups for making changes. Use the command `:TSHighlightCapturesUnderCursor` 
+to get highlight information on a given node. This can be helpful for changing highlight groups.
+
+<br>
+
+#### 
 
 ### Telescope
 
