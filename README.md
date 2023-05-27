@@ -134,5 +134,36 @@ Use the following mappings to swap parameters in tuples, function parameters, et
 
 
 
+#### Pickers used
+1. LSP picker TODO  
+
+<br>
+
+#### Changing telescope keymaps
+
+A function is provided in *telescope.nvim* where the mappings for opening certain pickers should go:
+```lua
+local function set_keymaps()
+    local builtin = require('telescope.builtin')
+    vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+    vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+    vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+    vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+end
+```
+
+#### Current keymaps
+
+- `<leader>ff` to pick a file
+- `<leader>fg` to do a live string grep
+- `<leader>fb` to pick a buffer
+- `<leader>fh` to pick help tags
+
+
+### LSP
+
+
+
+
 
 TODO
