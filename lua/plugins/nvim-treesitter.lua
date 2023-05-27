@@ -57,7 +57,6 @@ local options = {
     textobjects = {
         --[[
             'select' allows for selection on various queries in visual mode.
-            custom queries may or may not be taken care of in this file TODO
 
             selection modes changes the visual mode for a particular query (ex. "V" for linewise selection)
         --]]

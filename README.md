@@ -99,7 +99,8 @@ Text objects further enhance the functionality of treesitter.
 Use the following mappings in visual mode:
 - `<leader>sf` to select the entire function the cursor-targeted node is currently in (query on the tag `@function.outer`)
 - `<leader>sF` to select the inside of the function the cursor-targeted node is currently in (query on the tag `@function.inner`)
-- `<leader>so` to select the entire comment
+- `<leader>so` to select the entire comment  
+
 More text object queries can be found in the [official documentation](https://github.com/nvim-treesitter/nvim-treesitter-textobjects#text-objects-select).  
 
 #### Movement:
@@ -111,12 +112,8 @@ Use the following motions:
 #### Swapping: 
 
 Use the following mappings to swap parameters in tuples, function parameters, etc.:
-- `<space>s` to swap nodes forward
-- `<space>S` to swap nodes backward
-
-#### Custom queries:
-
-TODO.
+- `<leader>s` to swap nodes forward
+- `<leader>S` to swap nodes backward
 
 ### Telescope
 
