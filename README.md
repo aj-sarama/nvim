@@ -26,7 +26,11 @@ TODO: write about settings chosen and what to put in there
 For each new plugin, create a new file in this directory named *[plugin_name].lua*. 
 Follow the specs outlined in [lazy](https://github.com/folke/lazy.nvim)
 
+
+
 ## Plugin List
+
+
 
 ### Color scheme
 
@@ -41,18 +45,30 @@ to disable the color scheme without deleting it.
 <br>
 
 #### Other issues:
-1. Setting the values for certain highlight groups, especially ones for other plugins that will be loaded after the color scheme 
+Setting the values for certain highlight groups, especially ones for other plugins that will be loaded after the color scheme 
 does not currently work as intended. *rose-pine* has a `highlight_groups` table, however it seems that the configuration of other 
-plugins afterwards overwrites the highlight groups.  
-
+plugins afterwards overwrites the highlight groups. This appears to be an issue specific to managing plugins with lazy.  
 <br>
 
-#### Current ideas to solve this issue: TODO
-1. Modifying the highlight groups after the `setup` call in the `config` function: This has the downside of spreading references to 
-highlight groups across several files. However, the highlight group settings would be local to each plugin, so keeping track of 
-which highlight group belongs to which plugin coincidentally becomes easier in this case.
-2. Adding autocommands to the color scheme *.lua* config: This has the benefit of keeping all highlight group-setting functionality 
-within the color scheme plugin setup. The relevant event for the autocommand should be `BufEnter`.
+#### Changing highlight groups per-plugin
+The changing of highlight groups pertaining to a specific plugin are located within functions in the lua config files for that 
+specific plugin.  
+
+Here is an example of a function changing the highlight groups for `telescope.nvim`. The function is called in the `config` 
+function provided to lazy:
+```lua
+local function set_highlight_groups()
+    local util = require("rose-pine.util")
+    util.highlight("TelescopeBorder", { fg = "highlight_high", bg = "none" })
+    util.highlight("TelescopeNormal", { bg = "none" })
+    util.highlight("TelescopePromptNormal", { bg = "base" })
+    util.highlight("TelescopeResultsNormal", { fg = "subtle", bg = "none" })
+    util.highlight("TelescopeSelection", { fg = "text", bg = "base" })
+    util.highlight("TelescopeSelectionCaret", { fg = "rose", bg = "rose" })
+end
+```
+
+<br>
 
 ### Treesitter
 
@@ -112,6 +128,11 @@ Use the following mappings to swap parameters in tuples, function parameters, et
 - `<leader>s` to swap nodes forward
 - `<leader>S` to swap nodes backward
 
+
+
 ### Telescope
+
+
+
 
 TODO

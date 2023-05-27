@@ -29,6 +29,18 @@ local options = {
   }
 }
 
+-- put the setting of all highlight groups in this function
+-- this function was written specifically to be used with rose-pine
+local function set_highlight_groups()
+    local util = require("rose-pine.util")
+    util.highlight("TelescopeBorder", { fg = "highlight_high", bg = "none" })
+    util.highlight("TelescopeNormal", { bg = "none" })
+    util.highlight("TelescopePromptNormal", { bg = "base" })
+    util.highlight("TelescopeResultsNormal", { fg = "subtle", bg = "none" })
+    util.highlight("TelescopeSelection", { fg = "text", bg = "base" })
+    util.highlight("TelescopeSelectionCaret", { fg = "rose", bg = "rose" })
+end
+
 return {
     'nvim-telescope/telescope.nvim',
     tag = '0.1.1',
@@ -37,9 +49,9 @@ return {
     opts = options,
     config = function(_, opts)
         require("telescope").setup(opts)
-        --vim.cmd('highlight TelescopeNormal guifg=#ff0000 guibg=#000000 gui=bold')
-        vim.keymap.set("n", "<space>ff", ":Telescope find_files<CR>")
 
+        vim.keymap.set("n", "<space>ff", ":Telescope find_files<CR>")
+        set_highlight_groups()
     end,
     dependencies = { 'nvim-lua/plenary.nvim' },
     event = "BufEnter",

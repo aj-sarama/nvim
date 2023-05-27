@@ -41,12 +41,22 @@ local options = {
     -- Change specific vim highlight groups
     -- https://github.com/rose-pine/neovim/wiki/Recipes
     highlight_groups = {
+		TelescopeBorder = { fg = "highlight_high", bg = "none" },
+		TelescopeNormal = { bg = "none" },
+		TelescopePromptNormal = { bg = "base" },
+		TelescopeResultsNormal = { fg = "subtle", bg = "none" },
+		TelescopeSelection = { fg = "text", bg = "base" },
+		TelescopeSelectionCaret = { fg = "rose", bg = "rose" },
+	},
+    --[[
+    highlight_groups = {
         ColorColumn = { bg = "rose" },
 
         -- Blend colours against the "base" background
         CursorLine = { bg = "foam", blend = 10 },
         StatusLine = { fg = "love", bg = "love", blend = 10 },
     }
+    --]]
 }
 
 return {
