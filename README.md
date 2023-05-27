@@ -56,7 +56,7 @@ within the color scheme plugin setup. The relevant event for the autocommand sho
 
 ### Treesitter
 
-Treesitter manages syntax highlights and several motions when writing code.  
+Treesitter manages syntax highlights and motions when writing or editing code.  
 
 #### Setting languages:
 Add any language (see `:TSModuleInfo` for a list of supported languages) by adding an element to this table in *nvim-treesitter.lua*:  
@@ -67,7 +67,6 @@ local languages = {
     "vim",
     "vimdoc",
     "query",
-    -- ALL ABOVE ARE CONSIDERED REQUIRED
     -- ADD NEW LANGUAGES BELOW
     "python",
     "rust",
@@ -76,30 +75,28 @@ local languages = {
 ```  
 *note that the nvim-treesitter documentation recommends not removing the first 5 parsers listed*  
 <br>
-The parsers will be installed inside `/.config/nvim/parsers`. 
+The treesitter parsers will be installed inside `/.config/nvim/parsers`. 
 <br>
 
 #### Changing highlight groups:
 
-Examples for changing highlight groups for treesitter nodes are in `change_highlight_groups()`. 
+Examples for changing highlight groups for treesitter nodes are in */lua/plugin/nvim-treesitter.lua* `change_highlight_groups()`. 
 
 #### Treesitter playground:
 
-*NOTE: treesitter playground is installed but typically disabled in my config. Edit to the treesitter playground config to enable it.*  
+*NOTE: treesitter playground is installed but typically disabled in my config. Edit the treesitter playground config to enable it.*  
 <br>
 Treesitter playground can assist with identifying the highlight groups for making changes. Use the command `:TSHighlightCapturesUnderCursor` 
-to get highlight information on a given node. This can be helpful for changing highlight groups.
+to get highlight information on a given node. This can be helpful for identifying highlight groups so they can be changed in the 
+previously mentioned function.
 
 ### Treesitter text objects
-
-Text objects further enhance the functionality of treesitter.  
 
 #### Selection:
 
 Use the following mappings in visual mode:
 - `<leader>sf` to select the entire function the cursor-targeted node is currently in (query on the tag `@function.outer`)
 - `<leader>sF` to select the inside of the function the cursor-targeted node is currently in (query on the tag `@function.inner`)
-- `<leader>so` to select the entire comment  
 
 More text object queries can be found in the [official documentation](https://github.com/nvim-treesitter/nvim-treesitter-textobjects#text-objects-select).  
 

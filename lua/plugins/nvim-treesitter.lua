@@ -1,26 +1,23 @@
--- list of installed languages
--- any languages added to this list will be automatically installed on the next setup() call
+-- Below is a table of languages that will be installed when setup() is run
 local languages = {
     "c", 
     "lua",
     "vim",
     "vimdoc",
     "query",
-    -- ALL ABOVE ARE CONSIDERED REQUIRED
     -- ADD NEW LANGUAGES BELOW
     "python",
     "rust",
     "haskell",
 }
 
--- parsers will be installed here
+-- parsers will be installed inside your nvim/ directory
 local parser_path = os.getenv("HOME") .. "/.config/nvim/parsers"
-
 vim.opt.runtimepath:append(parser_path)
 
 --[[
     NOTE: 'auto_install' is currently set to false, which should be the case whenever the TreeSitter CLI is not installed.
-    -> If you have the TS CLI installed, change 'auto_install' to true to automatically install parsers for languages.
+          If you have the TS CLI installed, change 'auto_install' to true to automatically install parsers for languages.
 --]]
 local options = {
     ensure_installed = languages,
@@ -65,7 +62,6 @@ local options = {
             keymaps = {
                 ["<leader>sf"] = { query = "@function.outer", desc = "select function outer" },
                 ["<leader>sF"] = { query = "@function.inner", desc = "select function inner" },
-                ["<leader>sc"] = { query = "@comment.outer", desc = "select comment" },
             },
             selection_modes = {
                 -- select entire lines for these queries
@@ -110,33 +106,6 @@ local options = {
     }
 
 }
-
---[[
-    Below are some simple functions that use treesitter utility to swap adjacent nodes using a keymap.
-    
-    swap_forward() will swap the node that the cursor is on with the next node
-    swap_backward() does the same in reverse
-
-    The keymaps for this functionality are set below the functions
---]]
-local ts_utils = require('nvim-treesitter.ts_utils')
-local function swap_forward()
-    local curr_node = ts_utils.get_node_at_cursor()
-    local next_node = ts_utils.get_next_node(curr_node, true, true)
-    local buffer_number = vim.fn.bufnr('%')
-    if curr_node and next_node then
-        ts_utils.swap_nodes(curr_node, next_node, buffer_number, true) 
-    end
-end
-
-local function swap_backward()
-    local curr_node = ts_utils.get_node_at_cursor()
-    local next_node = ts_utils.get_previous_node(curr_node, true, true)
-    local buffer_number = vim.fn.bufnr('%')
-    if curr_node and next_node then
-        ts_utils.swap_nodes(curr_node, next_node, buffer_number, true) 
-    end
-end
 
 -- In the event that you want to reassign certain highlight groups, add to this function:
 local function change_highlight_groups()
