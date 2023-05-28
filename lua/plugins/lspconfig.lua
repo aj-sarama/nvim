@@ -21,6 +21,9 @@ local lsp = {
             },
         },
     },
+
+    -- Python
+    pyright = {},
 }
 
 -- add all keymaps here
