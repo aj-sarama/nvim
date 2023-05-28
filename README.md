@@ -340,3 +340,9 @@ This is currently TODO.
 
 `autopairs.nvim` adds functionality for automatically closing opening parentheses, brackets, and quotes. Part of the configuration 
 also exists in the LSP config file, since `autopairs` and `cmp` hook together for some autocomplete functionality. 
+
+## Leap
+
+`leap.nvim` is an amazing tool for effortlessly moving around a document without the mouse. Here are the default keybindings:
+- `s{character 1}{character 2}` jump forward to word starting with these 2 characters anywhere below the cursor
+- `S{character 1}{character 2}` jump backward to word starting with these 2 characters anywhere above the cursor
