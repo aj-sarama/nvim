@@ -109,6 +109,29 @@ local function set_highlight_groups()
 end
 ```
 
+### Colors:
+
+Convenient list of colors provided by rose-pine:
+```lua
+nc = '#16141f',
+base = '#191724',
+surface = '#1f1d2e',
+overlay = '#26233a',
+muted = '#6e6a86',
+subtle = '#908caa',
+text = '#e0def4',
+love = '#eb6f92',
+gold = '#f6c177',
+rose = '#ebbcba',
+pine = '#31748f',
+foam = '#9ccfd8',
+iris = '#c4a7e7',
+highlight_low = '#21202e',
+highlight_med = '#403d52',
+highlight_high = '#524f67',
+none = 'NONE',
+```
+
 ## Treesitter
 
 Treesitter manages syntax highlights and motions when writing or editing code.  
@@ -287,5 +310,28 @@ The following keymappings are used to navigate the autocomplete windows that wil
 `LuaSnip.nvim` is the snippet engine used together with `cmp.nvim`. No additional snippet functionality has been added outside of 
 the defaults.
 
+## Scope Visual Lines
 
+`indent-blankline.nvim` is used to generate the scoping lines for code.
 
+### Changing Line Colors
+
+Use colors directly from the `rose-pine` palette like so:
+```lua
+local function set_highlight_groups()
+    local colors = require('rose-pine.palette')
+    vim.api.nvim_set_hl(0, "IndentBlanklineIndent1", { fg = colors["highlight_med"], bg = "none", nocombine = true })
+    vim.api.nvim_set_hl(0, "IndentBlanklineIndent2", { fg = colors["highlight_high"], bg = "none", nocombine = true })
+end
+```
+
+### Showing Current Context
+
+This is currently TODO.
+
+### Other TODO
+
+1. Have indent-blankline calculate using treesitter. Add treesitter as a dependency
+2. Use the current context functionality outlined in the documentation
+3. Disable for certain filetypes such as markdown
+4. Disable for extremely large buffers
