@@ -57,7 +57,6 @@ local function set_keymaps()
 
         { desc = "copy error into register" })
 end
-
 -- these need to be in an autocommand group since they should only be used after the lsp has attached
 vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup('UserLspConfig', {}),
@@ -107,6 +106,7 @@ return {
         'hrsh7th/nvim-cmp',
         'L3MON4D3/LuaSnip',
         'saadparwaiz1/cmp_luasnip',
+        'windwp/nvim-autopairs',
     },
 
     -- init will set up autocompletion
@@ -180,5 +180,11 @@ return {
             lspconfig[server].setup(settings)
         end
         set_keymaps()
+        local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+        local cmp = require('cmp')
+        cmp.event:on(
+            'confirm_done',
+            cmp_autopairs.on_confirm_done()
+        )
     end,
 }

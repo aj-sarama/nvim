@@ -1,14 +1,12 @@
 local options = {
     char_highlight_list = {
         "IndentBlanklineIndent1",
-        "IndentBlanklineIndent2",
     },
 }
 
 local function set_highlight_groups()
     local colors = require('rose-pine.palette')
-    vim.api.nvim_set_hl(0, "IndentBlanklineIndent1", { fg = colors["highlight_med"], bg = "none", nocombine = true })
-    vim.api.nvim_set_hl(0, "IndentBlanklineIndent2", { fg = colors["highlight_high"], bg = "none", nocombine = true })
+    vim.api.nvim_set_hl(0, "IndentBlanklineIndent1", { fg = colors["highlight_low"], bg = "none", nocombine = true })
 end
 
 return {
