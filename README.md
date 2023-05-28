@@ -335,3 +335,8 @@ This is currently TODO.
 2. Use the current context functionality outlined in the documentation
 3. Disable for certain filetypes such as markdown
 4. Disable for extremely large buffers
+
+## Autopairs
+
+`autopairs.nvim` adds functionality for automatically closing opening parentheses, brackets, and quotes. Part of the configuration 
+also exists in the LSP config file, since `autopairs` and `cmp` hook together for some autocomplete functionality. 
