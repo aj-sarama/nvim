@@ -133,6 +133,14 @@ Treesitter playground can assist with identifying the highlight groups for makin
 to get highlight information on a given node. This can be helpful for identifying highlight groups so they can be changed in the 
 previously mentioned function.
 
+### Node-based selection:
+
+The following bindings can be useful for somewhat fine-grained incremental selection:
+- `<CR>` to initialize incremental selection on the current node (under cursor)
+- `<CR>` to include the next node in the selection
+- `<Tab>` to increment the scope
+- `<S-Tab>` to decrement nodes from the selection
+
 ## Treesitter Text Objects
 
 ### Selection:
