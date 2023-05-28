@@ -251,4 +251,24 @@ The following functionality for working with language server diagnostics (such a
 
 Code actions are not yet implemented.
 
+## Autocomplete + Snippets
+
+Since autocomplete and LSP go hand-in-hand, their setups are included in the same file. `cmp.nvim` is set up in the `init` function 
+in `/lua/plugins/nvim-lspconfig.lua`. Connecting autocomplete functionality to the LSP is done automatically in the `config` function.  
+
+### Keymappings
+
+The following keymappings are used to navigate the autocomplete windows that will show up when writing code:
+- `<C-b>` scroll the preview documentation up 4 lines
+- `<C-f>` scroll the preview documentation down 4 lines
+- `<C-Space>` complete the selected mapping
+- `<C-e>` abort the mapping window
+- `<CR>` autocomplete *NOTE: the snippet must be selected explicitly for <CR> to complete*
+
+### Snippets
+
+`LuaSnip.nvim` is the snippet engine used together with `cmp.nvim`. No additional snippet functionality has been added outside of 
+the defaults.
+
+
 
