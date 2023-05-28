@@ -1,0 +1,17 @@
+{
+    "workspace.library": [
+        "/Users/ajsarama/.config/nvim",
+        "/Users/ajsarama/.local/share/nvim/lazy/lazy.nvim",
+        "/Users/ajsarama/.local/share/nvim/lazy/nvim-lspconfig",
+        "/Users/ajsarama/.local/share/nvim/lazy/nvim-treesitter-textobjects",
+        "/Users/ajsarama/.local/share/nvim/lazy/nvim-treesitter",
+        "/Users/ajsarama/.local/share/nvim/lazy/playground",
+        "/Users/ajsarama/.local/share/nvim/lazy/rose-pine",
+        "/opt/homebrew/Cellar/neovim/0.9.0/share/nvim/runtime",
+        "/opt/homebrew/Cellar/neovim/0.9.0/lib/nvim",
+        "/Users/ajsarama/.local/state/nvim/lazy/readme",
+        "/Users/ajsarama/.config/nvim/parsers",
+        "/Users/ajsarama/.local/share/nvim/lazy/playground/after",
+        "${3rd}/luassert/library"
+    ]
+}

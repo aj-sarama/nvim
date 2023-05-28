@@ -1,58 +1,87 @@
-# Simple Lua Neovim Config
+# Lua Neovim Config
 
 ---
 
-## Lazy Plugin Manager
+## Plugin Manager
 
-I use [lazy](https://github.com/folke/lazy.nvim) to manage plugins.
+[lazy](https://github.com/folke/lazy.nvim) is the plugin manager used in this config. `lazy.nvim` lazy-loads plugins in order to 
+reduce startup times and spread out the inevitable performance hits many plugins may cause.
 
-### TODO
-...
+## File Structure
 
-### Autocommands
+```
+nvim
+├── README.md
+├── init.lua
+├── lazy-lock.json
+├── lua
+│   ├── autocommands.lua
+│   ├── keymaps.lua
+│   ├── plugins
+│   │   ├── lspconfig.lua
+│   │   ├── nvim-treesitter-textobjects.lua
+│   │   ├── nvim-treesitter.lua
+│   │   └── ...
+│   └── settings.lua
+└── parsers
+```
 
-TODO: write about autocommands file and what to put in there
+### init.lua
 
-### Keymaps
+`init.lua` requires the 3 `*.lua` files in `lua/` (descriptions of these files are in the following sections). This file also 
+sets up the package manager. `lazy.nvim` default configuration can be changed here.
 
-The file *lua/keymaps.lua* should set any non-plugin keymappings. `<leader>` is set to `<space>` in this file.
+### autocommands.lua
 
-### Settings
+`autocommands.lua` is a file for creating autocommands that do not pertain to a particular plugin. Plugin-specific autocommands 
+should go in the `[plugin-name].lua` file in `lua/plugins/`.  
+Current autocommands in `autocommands.lua`:  
+- None!
 
-TODO: write about settings chosen and what to put in there
+### keymaps.lua
 
-### /lua/plugins directory
+`keymaps.lua` is a file for setting non plugin-specific keymappings. For example, `<leader>` is set to `<Space>` in this file.
 
-For each new plugin, create a new file in this directory named *[plugin_name].lua*. 
-Follow the specs outlined in [lazy](https://github.com/folke/lazy.nvim)
+### settings.lua
 
+`settings.lua` is a file for standard vim settings such as relative line numbers and cursor type.
 
+### /lua/plugins/ Directory
+
+Each plugin used in this config (with some exceptions) has their own `[plugin-name].lua` file. `lazy.nvim` will automatically require 
+each of these modules, and each one is expected to return a configuration table that follows the specs outlined in 
+[lazy](https://github.com/folke/lazy.nvim).
 
 ## Plugin List
 
+1. [rose-pine](https://github.com/rose-pine/neovim) colorscheme
+2. [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) for treesitter-based highlighting and motions
+3. [telescope](https://github.com/nvim-telescope/telescope.nvim) for fuzzy finding over files, code, and other lists
+4. [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) for LSP integration and many powerful motions
 
+# Plugin Details
 
-### Color scheme
+---
+
+## Color Scheme
 
 My current color scheme is [rose-pine](https://github.com/rose-pine/neovim), however this is subject to frequent change.
-Keep *rose-pine.lua* intact as a reference for changing color schemes. Change the *enabled* entry in the plugin options to `false`
+Keep `rose-pine.lua` intact as a reference for creating config files for new color schemes. Change the `enabled` entry in the plugin options to `false`
 to disable the color scheme without deleting it.  
-<br>
-#### Notes from managing color schemes with lazy:  
+
+### Notes from managing color schemes with lazy:  
 1. Set the `priority` entry to `1000` to ensure the color scheme loads first.
 2. The `config` function needs to require the module *and* run the vim command to set the color scheme.  
 
-<br>
-
-#### Other issues:
+### Other issues:
 Setting the values for certain highlight groups, especially ones for other plugins that will be loaded after the color scheme 
-does not currently work as intended. *rose-pine* has a `highlight_groups` table, however it seems that the configuration of other 
-plugins afterwards overwrites the highlight groups. This appears to be an issue specific to managing plugins with lazy.  
-<br>
+does not currently work as intended. The `rose-pine` setup has a `highlight_groups` table, however it seems that the configuration of other 
+plugins afterwards overwrites the highlight groups. This appears to be an issue specific to managing plugins with `lazy.nvim`.  
 
-#### Changing highlight groups per-plugin
-The changing of highlight groups pertaining to a specific plugin are located within functions in the lua config files for that 
-specific plugin.  
+### Changing highlight groups per-plugin
+Changing highlight groups pertaining to a specific plugin should occur in that plugin's lua module.
+There are functions in most of the relevant plugin config files named `set_highlight_groups()`.  
+
 
 Here is an example of a function changing the highlight groups for `telescope.nvim`. The function is called in the `config` 
 function provided to lazy:
@@ -68,13 +97,11 @@ local function set_highlight_groups()
 end
 ```
 
-<br>
-
-### Treesitter
+## Treesitter
 
 Treesitter manages syntax highlights and motions when writing or editing code.  
 
-#### Setting languages:
+### Setting languages:
 Add any language (see `:TSModuleInfo` for a list of supported languages) by adding an element to this table in *nvim-treesitter.lua*:  
 ```lua
 local languages = {
@@ -94,11 +121,11 @@ local languages = {
 The treesitter parsers will be installed inside `/.config/nvim/parsers`. 
 <br>
 
-#### Changing highlight groups:
+### Changing highlight groups:
 
-Examples for changing highlight groups for treesitter nodes are in */lua/plugin/nvim-treesitter.lua* `change_highlight_groups()`. 
+Examples for changing highlight groups for treesitter nodes are in `/lua/plugin/nvim-treesitter.lua` `change_highlight_groups()`. 
 
-#### Treesitter playground:
+### Treesitter playground:
 
 *NOTE: treesitter playground is installed but typically disabled in my config. Edit the treesitter playground config to enable it.*  
 <br>
@@ -106,64 +133,114 @@ Treesitter playground can assist with identifying the highlight groups for makin
 to get highlight information on a given node. This can be helpful for identifying highlight groups so they can be changed in the 
 previously mentioned function.
 
-### Treesitter text objects
+## Treesitter Text Objects
 
-#### Selection:
+### Selection:
 
-Use the following mappings in visual mode:
+This config supports the following functionality using treesitter text objects:
 - `<leader>sf` to select the entire function the cursor-targeted node is currently in (query on the tag `@function.outer`)
 - `<leader>sF` to select the inside of the function the cursor-targeted node is currently in (query on the tag `@function.inner`)
 
 More text object queries can be found in the [official documentation](https://github.com/nvim-treesitter/nvim-treesitter-textobjects#text-objects-select).  
 
-#### Movement:
+### Movement:
 
-Use the following motions:  
 - `[[` to go to the beginning of the previous function
 - `]]` to go to the beginning of the next function
 
-#### Swapping: 
+### Swapping: 
 
 Use the following mappings to swap parameters in tuples, function parameters, etc.:
 - `<leader>s` to swap nodes forward
 - `<leader>S` to swap nodes backward
 
+## Telescope
 
-
-### Telescope
-
-
-
-#### Pickers used
-1. LSP picker TODO  
+### Installed pickers, sorters, extensions
+1. None!
 
 <br>
 
-#### Changing telescope keymaps
+### Telescope keymaps
 
 A function is provided in *telescope.nvim* where the mappings for opening certain pickers should go:
 ```lua
 local function set_keymaps()
     local builtin = require('telescope.builtin')
-    vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-    vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-    vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-    vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+    vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = "telescope find file" })
+    vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = "telescope live grep"})
+    vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = "telescope buffers" })
+    vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = "telescope help pages" })
+    vim.keymap.set('n', '<leader>fi', builtin.builtin, { desc = "telescope builtin pickers" })
+    vim.keymap.set('n', '<leader>fm', builtin.marks, { desc = "telescope marks" })
+    vim.keymap.set('n', '<leader>gf', builtin.git_files, { desc = "telescope git files" })
 end
 ```
+The above handles most of the commonly used built-in pickers. Search over all built-in pickers using `<leader>fi`.
 
-#### Current keymaps
+<br>
 
-- `<leader>ff` to pick a file
-- `<leader>fg` to do a live string grep
-- `<leader>fb` to pick a buffer
-- `<leader>fh` to pick help tags
+A few handy non-default mappings were also added:
+- `<C-u>` to clear the current prompt in the telescope window
+
+## LSP
+
+This config does not use an automatic LSP management tool. All language servers should be installed with `brew` (or other package 
+manager). 
+
+### Setting up a new language server
+
+To set up a new language server, first make sure it is installed and available somewhere in nvim's `rtp`. Then, add an entry to the 
+`lsp` table in `/lua/plugins/lspconfig.lua`. Here is an example for `lua-language-server`:  
+
+```lua
+local lsp = {
+    -- Lua
+    lua_ls = {
+        settings = {
+            Lua = {
+                runtime = {
+                    version = 'LuaJIT',
+                },
+                diagnostics = {
+                    globals = { 'vim' },
+                },
+                workspace = {
+                    library = vim.api.nvim_get_runtime_file("", true),
+                },
+                telemetry = {
+                    enable = false,
+                },
+            },
+        },
+    },
+}
+```
+Each language server has their own unique settings and defaults to configure. See `nvim-lspconfig` [server configuration](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md)
+for details on how to install and set up a specific language server.  
+
+### Keymappings
+
+The following are default key mappings for all language servers in this config. Note that not all functionality is available for every language server.  
+
+- `<leader>gD` to go to declaration (under cursor)
+- `<leader>gd` to go to definition (under cursor)
+- `<leader>h` show hovering window with information about text under the cursor
+- `<leader>I` to go to implementation (under cursor)
+- `<leader>gt` to go to the type definition (under cursor)
+- `<leader>rn` to rename a node (under cursor)
+- `<leader>F` to asynchronously run the attached LSP's formatter on the current file
+
+### Diagnostics
+
+The following functionality for working with language server diagnostics (such as errors and warnings) was also included:
+- `<leader>e` to open the in-line diagnostic message into a floating window
+- `[d` to jump to the previous diagnostic in the file
+- `]d` to jump to the next diagnostic in the file
+- `<leader>ce` to copy the diagnostic sourced under the cursor into the system clipboard (this is a custom function I wrote in `/lua/plugins/lspconfig.lua`)
+
+### Code Actions
+
+Code actions are not yet implemented.
 
 
-### LSP
-
-
-
-
-
-TODO
