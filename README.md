@@ -251,6 +251,11 @@ The following functionality for working with language server diagnostics (such a
 
 Code actions are not yet implemented.
 
+### Debugging LSP
+
+The first step in determining whether an LSP is working is to run `:LspInfo` and verify that the expected LSP is attached to the 
+current buffer.
+
 ## Autocomplete + Snippets
 
 Since autocomplete and LSP go hand-in-hand, their setups are included in the same file. `cmp.nvim` is set up in the `init` function 
