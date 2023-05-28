@@ -2,6 +2,18 @@
 
 ---
 
+## Initial Setup
+
+Run the following to install the required dependencies:
+1. `brew install nvim`
+2. `brew install ripgrep`
+3. `brew install fd`
+
+Then install language servers:
+1. `brew install lua-language-server`
+2. `brew install pyright`
+3. (do the same for every language server you intend on using)
+
 ## Plugin Manager
 
 [lazy](https://github.com/folke/lazy.nvim) is the plugin manager used in this config. `lazy.nvim` lazy-loads plugins in order to 
