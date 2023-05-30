@@ -1,6 +1,4 @@
-local lspconfig = require('lspconfig')
 -- see server_configurations.md to configure individual servers
-
 local lsp = {
     -- Lua
     lua_ls = {
@@ -14,18 +12,19 @@ local lsp = {
                 },
                 workspace = {
                     library = vim.api.nvim_get_runtime_file("", true),
+                    checkThirdParty = false,
                 },
                 telemetry = {
                     enable = false,
                 },
             },
         },
+        cmd = { "/home/ajs/LSP/lua-language-server/bin/lua-language-server" }
     },
 
     -- Python
-    pyright = {},
+    --pyright = {},
 }
-
 -- add all keymaps here
 local function set_keymaps()
     vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = "open diagnostic float" })
@@ -174,6 +173,7 @@ return {
     end,
 
     config = function(_, opts)
+        local lspconfig = require('lspconfig')
         local capabilities = require('cmp_nvim_lsp').default_capabilities()
         for server, settings in pairs(lsp) do
             settings.capabilities = capabilities

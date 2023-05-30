@@ -6,7 +6,7 @@ local options = {
     dark_variant = "main",
     bold_vert_split = false,
     dim_nc_background = false,
-    disable_background = false,
+    disable_background = true,
     disable_float_background = false,
     disable_italics = false,
 
@@ -69,5 +69,6 @@ return {
     config = function(opts)
         require("rose-pine").setup(opts)
         vim.cmd("colorscheme rose-pine")
+        vim.cmd("highlight Normal guibg=none")
     end,
 }

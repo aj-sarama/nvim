@@ -46,5 +46,5 @@ vim.opt.updatetime = 50
 -- colorcolumn to mark 80 characters
 --vim.opt.colorcolumn = "80"
 
-vim.opt.list = true
-vim.opt.listchars:append "eol:↴"
+--vim.opt.list = true
+--vim.opt.listchars:append "eol:↴"
